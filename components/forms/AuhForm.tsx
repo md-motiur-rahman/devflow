@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   DefaultValues,
-  Field,
   FieldValues,
   Path,
   SubmitErrorHandler,
@@ -88,31 +87,33 @@ const AuthForm = <T extends FieldValues>({
           disabled={form.formState.isSubmitting}
           className="primary-gradient paragraph-medium min-h-12 w-full rounded-2 px-4 py-3 font-inter !text-light-900"
         >
-          {form.formState.isSubmitting ? <Loader className=" animate-spin" /> : buttonText}
-        </Button>
-        {
-          formType === "SIGN_IN" ? (
-            <p className="paragraph-regular text-dark400_light700">
-              Don&apos;t have an account?{" "}
-              <a
-                href="/sign-up"
-               className="paragraph-medium primary-text-gradient hover:text-primary-600 focus:outline-none cursor-pointer "
-              >
-                Sign Up
-              </a>
-            </p>
+          {form.formState.isSubmitting ? (
+            <Loader className=" animate-spin" />
           ) : (
-            <p className="paragraph-regular text-dark400_light700">
-              Already have an account?{" "}
-              <a
-                href="/sign-in"
-                className="paragraph-medium primary-text-gradient hover:text-primary-600 focus:outline-none cursor-pointer "
-              >
-                Sign In
-              </a>
-            </p>
-          ) 
-        }
+            buttonText
+          )}
+        </Button>
+        {formType === "SIGN_IN" ? (
+          <p className="paragraph-regular text-dark400_light700">
+            Don&apos;t have an account?{" "}
+            <a
+              href="/sign-up"
+              className="paragraph-medium primary-text-gradient hover:text-primary-600 focus:outline-none cursor-pointer "
+            >
+              Sign Up
+            </a>
+          </p>
+        ) : (
+          <p className="paragraph-regular text-dark400_light700">
+            Already have an account?{" "}
+            <a
+              href="/sign-in"
+              className="paragraph-medium primary-text-gradient hover:text-primary-600 focus:outline-none cursor-pointer "
+            >
+              Sign In
+            </a>
+          </p>
+        )}
       </form>
     </Form>
   );
