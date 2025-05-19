@@ -52,7 +52,7 @@ const Editor = ({ value, editorRef, fieldChange, ...props }: Props) => {
       key={resolvedTheme}
       markdown={value}
       ref={editorRef}
-      className="background-light800_dark200 light-border-2 markdown-editor dark-editor w-full border"
+      className="background-light800_dark200 light-border-2 markdown-editor dark-editor w-full border grid"
       onChange={fieldChange}
       plugins={[
         headingsPlugin(),
@@ -95,7 +95,7 @@ const Editor = ({ value, editorRef, fieldChange, ...props }: Props) => {
                 },
                 {
                   fallback: () => (
-                    <>
+                    <div className="flex items-center gap-2 flex-wrap">
                       <UndoRedo />
                       <Separator />
                       <BlockTypeSelect />
@@ -113,7 +113,7 @@ const Editor = ({ value, editorRef, fieldChange, ...props }: Props) => {
                       <InsertThematicBreak />
 
                       <InsertCodeBlock />
-                    </>
+                    </div>
                   ),
                 },
               ]}
