@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
 import HomeFilter from "@/components/filters/HomeFilter";
 import QuestionCard from "@/components/cards/QuestionCard";
+// import handleError from "@/lib/handlers/error";
+// import { NotFoundError } from "@/lib/http-error";
 
 const questions = [
   {
@@ -37,11 +39,22 @@ const questions = [
   },
 ];
 
+// const test = async() => {
+//   try {
+//     throw new NotFoundError("Test error");
+//   } catch (error) {
+//     return handleError(error);
+//   }
+// }
+
 interface SearchParams {
   searchParams: Promise<{ [key: string]: string }>;
 }
 
 const Home = async ({ searchParams }: SearchParams) => {
+  // const result = await test();
+
+  // console.log(result);
   const { query = "", filter = "" } = await searchParams;
 
   const filteredQuestions = questions.filter((question) => {
