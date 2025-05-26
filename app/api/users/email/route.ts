@@ -10,6 +10,7 @@ export async function POST(request: Request) {
 
     try {
         const validatedData = UserSchema.partial().safeParse({ email });
+        //? const validatedData = UserSchema.pick({ email: true }).safeParse(body);
         if(!validatedData.success){
             throw new ValidationError(validatedData.error.flatten().fieldErrors)
         }
