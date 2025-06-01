@@ -6,7 +6,8 @@ import ROUTES from "@/constants/routes";
 import HomeFilter from "@/components/filters/HomeFilter";
 import QuestionCard from "@/components/cards/QuestionCard";
 import handleError from "@/lib/handlers/error";
-import dbConnet from "@/lib/mongoose";
+
+import { api } from "@/lib/api";
 
 const questions = [
   {
@@ -41,7 +42,7 @@ const questions = [
 
 const test = async() => {
   try {
-    await dbConnet()
+    return api.users.getAll()
   } catch (error) {
     return handleError(error);
   }
@@ -52,7 +53,10 @@ interface SearchParams {
 }
 
 const Home = async ({ searchParams }: SearchParams) => {
-  await test();
+  
+  const users = await test();
+  console.log( users);
+  
 
    
   const { query = "", filter = "" } = await searchParams;
