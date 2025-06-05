@@ -81,7 +81,6 @@ export const UserSchema = z.object({
   reputation: z.number().optional(),
 });
 
-
 export const AccountSchema = z.object({
   userId: z.string().min(1, { message: "User ID is required." }),
   name: z.string().min(1, { message: "Name is required." }),
@@ -105,4 +104,24 @@ export const AccountSchema = z.object({
   providerAccountId: z
     .string()
     .min(1, { message: "Provider Account ID is required." }),
+});
+
+export const SignInWithOAuthSchema = z.object({
+  provider: z.enum(["github", "google"]),
+  providerAccountId: z
+    .string()
+    .min(1, { message: "Provider Account ID is required." }),
+  user: z.object({
+    name: z.string().min(1, { message: "Name is required." }),
+    username: z
+      .string()
+      .min(3, { message: "Username must be at least 3 characters long." }),
+    email: z
+      .string()
+      .email({ message: "Please provide a valid email address." }),
+    image: z
+      .string()
+      .url({ message: "Please provide a valid URL." })
+      .optional(),
+  }),
 });

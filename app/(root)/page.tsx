@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
 import HomeFilter from "@/components/filters/HomeFilter";
 import QuestionCard from "@/components/cards/QuestionCard";
-import handleError from "@/lib/handlers/error";
+import { auth } from "@/auth";
+//import handleError from "@/lib/handlers/error";
 
-import { api } from "@/lib/api";
+//import { api } from "@/lib/api";
 
 const questions = [
   {
@@ -40,13 +41,13 @@ const questions = [
   },
 ];
 
-const test = async() => {
-  try {
-    return api.users.getAll()
-  } catch (error) {
-    return handleError(error);
-  }
-}
+// const test = async() => {
+//   try {
+//     return api.users.getAll()
+//   } catch (error) {
+//     return handleError(error);
+//   }
+// }
 
 interface SearchParams {
   searchParams: Promise<{ [key: string]: string }>;
@@ -54,8 +55,10 @@ interface SearchParams {
 
 const Home = async ({ searchParams }: SearchParams) => {
   
-  const users = await test();
-  console.log( users);
+  // const users = await test();
+  // console.log( users);
+  const session = await auth();
+  console.log("Session:", session);
   
 
    
