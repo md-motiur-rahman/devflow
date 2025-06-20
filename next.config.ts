@@ -1,17 +1,35 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages:['pino', 'pino-pretty'],
+  serverExternalPackages: ["pino", "pino-pretty"],
   images: {
-    remotePatterns:[
+    remotePatterns: [
       {
         protocol: "https",
-        hostname: 'i.pinimg.com',
-        port: '',
-        pathname: '/**',
-      }
-    ]
-  }
+        hostname: "i.pinimg.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "devflow-images.s3.amazonaws.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
