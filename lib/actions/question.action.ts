@@ -1,17 +1,17 @@
 "use server";
 
-import { ActionResponse, ErrorResponse } from "@/types/global";
+import { ActionResponse, ErrorResponse, QuestionT } from "@/types/global";
 import action from "../handlers/actions";
 import { AskQuestionSchema } from "../validations";
 import handleError from "../handlers/error";
 import mongoose from "mongoose";
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
-import TagQuestion from "@/database/tag_question.model";
+import TagQuestion, { ITagQuestion } from "@/database/tag_question.model";
 
 export async function createQuestion(
   params: CreateQuestionParams
-): Promise<ActionResponse> {
+): Promise<ActionResponse<QuestionT>> {
   const validatedResult = await action({
     params,
     schema: AskQuestionSchema,
@@ -37,7 +37,7 @@ export async function createQuestion(
       throw new Error("Failed to create question");
     }
     const tagId: mongoose.Types.ObjectId[] = [];
-    const tagQuestionDocs = [];
+    const tagQuestionDocs: ITagQuestion[] = [];
     for (const tag of tags) {
       const existingTag = await Tag.findOneAndUpdate(
         {

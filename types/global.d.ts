@@ -11,7 +11,7 @@ interface Author {
   image: string;
 }
 
-interface Question {
+interface QuestionT {
   _id: string;
   title: string;
   tags: Tag[];
@@ -43,3 +43,8 @@ type ErrorResponse = ActionResponse<undefined> & {
 type APIErrorResponse = NextResponse<ErrorResponse>
 
 type APIResponse<T = null> = NextResponse<SuccessResponse<T> | APIErrorResponse>;
+
+interface RouteParams {
+  params : Promise<Record<string, string>>;
+  searchParams: Promise<Record<string, string>>;
+}
