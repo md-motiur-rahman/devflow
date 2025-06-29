@@ -102,7 +102,9 @@ const QuestionForm = ({ question, isEdit = false }: Params) => {
         });
         if (result.success) {
           toast.success("Question created successfully!");
-          if (result.data) router.push(ROUTES.QUESTION(result.data._id));
+          if (result.data && typeof result.data._id === "string") {
+            router.push(ROUTES.QUESTION(result.data._id));
+          }
         } else {
           toast.error(result.error?.message || "Failed to create question");
         }

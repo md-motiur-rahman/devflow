@@ -41,11 +41,21 @@ type ErrorResponse = ActionResponse<undefined> & {
   success: false;
 };
 
-type APIErrorResponse = NextResponse<ErrorResponse>
+type APIErrorResponse = NextResponse<ErrorResponse>;
 
-type APIResponse<T = null> = NextResponse<SuccessResponse<T> | APIErrorResponse>;
+type APIResponse<T = null> = NextResponse<
+  SuccessResponse<T> | APIErrorResponse
+>;
 
 interface RouteParams {
-  params : Promise<Record<string, string>>;
+  params: Promise<Record<string, string>>;
   searchParams: Promise<Record<string, string>>;
+}
+
+interface PaginatedSearchParams {
+  page?: number;
+  pageSize?: number;
+  sort?: string;
+  filter?: string;
+  query?: string;
 }

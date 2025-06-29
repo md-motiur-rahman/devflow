@@ -13,9 +13,14 @@ export const getDeviconClassName = (techName: string) => {
     : "devicon-devicon-plain";
 };
 
-export const getTimeStamp = (date: Date) => {
+export const getTimeStamp = (date: Date | string | number) => {
+  const parsedDate = new Date(date); // Convert to Date object
+  if (isNaN(parsedDate.getTime())) return "invalid date";
+
   const now = new Date();
-  const secondsAgo = Math.floor((now.getTime() - date.getTime()) / 1000);
+  const secondsAgo = Math.floor((now.getTime() - parsedDate.getTime()) / 1000);
+
+  if (secondsAgo < 0) return "just now";
 
   const units = [
     { label: "year", seconds: 31536000 },
@@ -33,5 +38,7 @@ export const getTimeStamp = (date: Date) => {
       return `${interval} ${unit.label}${interval > 1 ? "s" : ""} ago`;
     }
   }
+
   return "just now";
 };
+
